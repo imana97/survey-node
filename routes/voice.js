@@ -28,13 +28,13 @@ exports.interview = function(request, response) {
         var question = survey[questionIndex];
 
         if (err || !surveyResponse) {
-            say('Terribly sorry, but an error has occurred. Goodbye.');
+            say('Terribly sorry, but an error has occurred. Please call Christine at 617 373 6419. Goodbye.');
             return respond();
         }
 
         // If question is null, we're done!
         if (!question) {
-            say('Thank you for taking this survey. Goodbye!');
+            say('Thank you for taking Live well survey. Goodbye!');
             return respond();
         }
 
@@ -51,12 +51,12 @@ exports.interview = function(request, response) {
         // DTMF tones or recorded speech
         if (question.type === 'text') {
             say('Please record your response after the beep. '
-                + 'Press any key to finish.');
+                + 'Press any key or wait for the next question');
             twiml.record({
                 transcribe: true,
                 transcribeCallback: '/voice/' + surveyResponse._id
                     + '/transcribe/' + questionIndex,
-                maxLength: 60
+                maxLength: 20
             });
         } else if (question.type === 'boolean') {
             say('Press one for "yes", and any other key for "no".');
